@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, StudentPage.class);
                 Bundle extras = new Bundle();
                 extras.putString("ID", user);
+                extras.putString("NAME", "Ali");
                 i.putExtras(extras);
                 startActivity(i);
             }

@@ -1,6 +1,8 @@
 package com.example.apl_project;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +13,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.net.IDN;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
 
-    String s1,s2;
+    String s1,s2, name, Id;
     Context context;
     int length;
 
 
-    public MyAdapter(Context context, String s1, String s2, int length){
+    public MyAdapter(Context context, String s1, String s2, String name, String ID, int length){
         this.context = context;
         this.s1 = s1;
         this.s2 = s2;
         this.length = length;
+        this.name = name;
+        this.Id = ID;
     }
 
 
@@ -40,6 +46,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.title.setText(this.s1);
         holder.time.setText(position+"-"+(position+1));
         holder.attend.setOnClickListener(v -> {
+            Intent intent=new Intent(v.getContext(),OUT.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Bundle bundle=new Bundle();
+            bundle.putString("ID", this.Id);
+            bundle.putString("NAME", this.name);
+            intent.putExtras(bundle);
+            v.getContext().startActivity(intent);
+
         });
 
     }
@@ -57,7 +71,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             title = itemView.findViewById(R.id.className);
             time = itemView.findViewById(R.id.classTime);
             attend = itemView.findViewById(R.id.joinBTN);
-            attend.setOnClickListener(v -> Toast.makeText(context ,"username or password is wrong", Toast.LENGTH_SHORT).show());
         }
     }
 }
