@@ -8,26 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.net.IDN;
-
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
 
-    String s1,s2, name, Id;
+    String s1[],s2[], name, Id;
     Context context;
-    int length;
 
 
-    public MyAdapter(Context context, String s1, String s2, String name, String ID, int length){
+    public MyAdapter(Context context, String s1[], String s2[], String name, String ID){
         this.context = context;
         this.s1 = s1;
         this.s2 = s2;
-        this.length = length;
         this.name = name;
         this.Id = ID;
     }
@@ -37,13 +32,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.single_row,parent ,false);
+        View view = inflater.inflate(R.layout.course_style,parent ,false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.title.setText(this.s1);
+        holder.title.setText("CS"+this.s1[position]);
         holder.time.setText(position+"-"+(position+1));
         holder.attend.setOnClickListener(v -> {
             Intent intent=new Intent(v.getContext(),OUT.class);
@@ -60,7 +55,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        return length;
+        return this.s1.length;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -68,8 +63,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         Button attend;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.className);
-            time = itemView.findViewById(R.id.classTime);
+            title = itemView.findViewById(R.id.CTitle);
+            time = itemView.findViewById(R.id.CTime);
             attend = itemView.findViewById(R.id.joinBTN);
         }
     }

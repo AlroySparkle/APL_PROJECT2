@@ -7,7 +7,7 @@
     android:background="#a9dbff">
 
     <TextView
-        android:id="@+id/className"
+        android:id="@+id/CTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/classTime"
+        android:id="@+id/CTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toStartOf="@+id/joinBTN"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/className" />
+        app:layout_constraintTop_toBottomOf="@+id/CTitle" />
 
     <Button
         android:id="@+id/joinBTN"
@@ -49,7 +49,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.992"
-        app:layout_constraintStart_toEndOf="@+id/classTime"
+        app:layout_constraintStart_toEndOf="@+id/CTime"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.329" />
@@ -62,6 +62,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/className" />
+        app:layout_constraintTop_toBottomOf="@+id/CTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

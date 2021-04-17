@@ -16,6 +16,7 @@ public class StudentPage extends AppCompatActivity {
     RecyclerView rl;
     int counter = 0;
     private String name,id;
+    private String course[];
 
 
     @Override
@@ -34,13 +35,24 @@ public class StudentPage extends AppCompatActivity {
         SName.setText(name);
         update = findViewById(R.id.update);
         rl = findViewById(R.id.recyclerView);
-        MyAdapter myAdapter = new MyAdapter(getApplicationContext(), "test1","test2",id,name,++counter);
+        course = courses((int)(Math.random()*30));
+        MyAdapter myAdapter = new MyAdapter(getApplicationContext(), course,course,name,id);
         rl.setAdapter(myAdapter);
         rl.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         update.setOnClickListener(v -> {
-            MyAdapter myAdapter1 = new MyAdapter(getApplicationContext(), "test1","test2",id,name,++counter);
+            course = courses((int)(Math.random()*30));
+            MyAdapter myAdapter1 = new MyAdapter(getApplicationContext(), course,course,name,id);
             rl.setAdapter(myAdapter1);
             rl.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         });
+    }
+
+
+    protected String[] courses(int length){
+        String courses[] = new String[length];
+        for(int course = 0; course<courses.length;course++){
+            courses[course] = "10"+(int)(Math.random()*9);
+        }
+        return courses;
     }
 }
