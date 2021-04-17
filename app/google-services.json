@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "455462724837",
+    "project_id": "automated-attendance-78b7b",
+    "storage_bucket": "automated-attendance-78b7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455462724837:android:6cb28a4b8bbeeaa4bd200c",
+        "android_client_info": {
+          "package_name": "com.example.apl_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "455462724837-da8ern0uakh7q9fi8nf2a09ln1d77de9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUJZtSxCkIpG1Go_HLbL6lbCjTGIQVbDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "455462724837-da8ern0uakh7q9fi8nf2a09ln1d77de9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
