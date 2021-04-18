@@ -46,6 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             Bundle bundle=new Bundle();
             bundle.putString("ID", this.Id);
             bundle.putString("NAME", this.name);
+            bundle.putString("CLASS", this.s1[position]);
             intent.putExtras(bundle);
             v.getContext().startActivity(intent);
 

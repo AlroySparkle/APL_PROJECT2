@@ -29,8 +29,10 @@ public class StudentPage extends AppCompatActivity {
     RecyclerView rl;
     int counter = 0;
     private String firstName,id, lastName, password, emailAddress, name;
-    private String course[];
+    private static String course[];
+    private static String times[];
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    int noOfClasses;
 
 
     @Override
@@ -45,7 +47,7 @@ public class StudentPage extends AppCompatActivity {
             id = extras.getString("id");
             firstName = extras.getString("firstName");
             lastName = extras.getString("lastName");
-            name = firstName + lastName;
+            name = firstName +" "+ lastName;
             emailAddress = extras.getString("emailAddress");
             password = extras.getString("password");
         }
@@ -53,21 +55,35 @@ public class StudentPage extends AppCompatActivity {
 
 
 
-        db.collection("Lecture")
+            db.collection("Lecture")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task){
                             if (task.isSuccessful()){
+                                String classes="";
+                                String time="";
+                                String IDS="";
                                 for(QueryDocumentSnapshot document : task.getResult()){
-                                    Log.d("@Lecturs@ ", "------------------------------------------");
-                                    Log.d("@Lecturs@ ", "Subject_subjectId: " +document.getData().get("Subject_subjectId"));
-                                    Log.d("@Lecturs@ ", "State: " +document.getData().get("State"));
-                                    Log.d("@Lecturs@ ", "Teacher_teacherId: " +document.getData().get("Teacher_teacherId"));
-                                    Log.d("@Lecturs@ ", "time: " +document.getTimestamp("time").toDate());
+                                    if(document.getData().get("State").toString().equals("true")){
+                                        if(!classes.equals("")){
+                                            classes+=",";
+                                            time+=",";
+                                            IDS+=",";
+                                        }
+                                        classes+= document.getData().get("Subject_subjectId").toString();
+                                        time+=document.getTimestamp("time").toDate().toString();
 
+                                    }
                                 }
-                            } else{
+                                course = classes.split(",");
+                                times = time.split(",");
+                                rl = findViewById(R.id.recyclerView);
+                                MyAdapter myAdapter = new MyAdapter(getApplicationContext(), course,times,name,id);
+                                rl.setAdapter(myAdapter);
+                                rl.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            }
+                            else{
                                 Toast.makeText(getApplicationContext(),"Error!!!", Toast.LENGTH_LONG).show();
                                 Log.d(String.valueOf(getApplicationContext()), "Errorrrr!!!");
                             }
@@ -82,25 +98,43 @@ public class StudentPage extends AppCompatActivity {
         SID.setText(id);
         SName.setText(name);
         update = findViewById(R.id.update);
-        rl = findViewById(R.id.recyclerView);
-        course = courses((int)(Math.random()*30));
-        MyAdapter myAdapter = new MyAdapter(getApplicationContext(), course,course,name,id);
-        rl.setAdapter(myAdapter);
-        rl.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         update.setOnClickListener(v -> {
-            course = courses((int)(Math.random()*30));
-            MyAdapter myAdapter1 = new MyAdapter(getApplicationContext(), course,course,name,id);
-            rl.setAdapter(myAdapter1);
-            rl.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            update();
         });
     }
 
+    private void update(){
+        db.collection("Lecture")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task){
+                        if (task.isSuccessful()){
+                            String classes="";
+                            String time="";
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                if(document.getData().get("State").toString().equals("true")){
+                                    if(!classes.equals("")){
+                                        classes+=",";
+                                        time+=",";
+                                    }
+                                    classes+= document.getData().get("Subject_subjectId").toString();
+                                    time+=document.getTimestamp("time").toDate().toString();
+                                }
+                            }
+                            course = classes.split(",");
+                            times = time.split(",");
+                            rl = findViewById(R.id.recyclerView);
+                            MyAdapter myAdapter = new MyAdapter(getApplicationContext(), course,times,name,id);
+                            rl.setAdapter(myAdapter);
+                            rl.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"Error!!!", Toast.LENGTH_LONG).show();
+                            Log.d(String.valueOf(getApplicationContext()), "Errorrrr!!!");
+                        }
+                    }
 
-    protected String[] courses(int length){
-        String courses[] = new String[length];
-        for(int course = 0; course<courses.length;course++){
-            courses[course] = "10"+(int)(Math.random()*9);
-        }
-        return courses;
+                });
     }
 }
