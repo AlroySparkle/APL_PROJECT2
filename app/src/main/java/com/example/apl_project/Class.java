@@ -64,6 +64,7 @@ public class Class extends AppCompatActivity {
                         Log.w("Test", "Error writing document", e);
                     }
                 });
+        addStudent();
         update = findViewById(R.id.updateCourse);
         update.setOnClickListener(v -> {
             addStudent();
