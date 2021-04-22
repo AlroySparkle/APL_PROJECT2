@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -63,7 +64,6 @@ public class Class extends AppCompatActivity {
                         Log.w("Test", "Error writing document", e);
                     }
                 });
-        addStudent();
         update = findViewById(R.id.updateCourse);
         update.setOnClickListener(v -> {
             addStudent();
@@ -78,8 +78,8 @@ public class Class extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task){
                         if (task.isSuccessful()){
-                            String students=names[0];
-                            String sid=ids[0];
+                            String students="";
+                            String sid="";
                             for(QueryDocumentSnapshot document : task.getResult()){
                                 if(document.getData().get("Lecture_lectureId").toString().equals(id)){
                                     if(!students.equals("")){
@@ -106,6 +106,16 @@ public class Class extends AppCompatActivity {
                     }
 
                 });
+        out = findViewById(R.id.out);
+        out.setOnClickListener(v -> {
+            Intent i = new Intent(Class.this, StudentPage.class);
+            Bundle extras2 = new Bundle();
+            extras2.putString("id", ids[0]);
+            extras2.putString("firstName", names[0]);
+            extras2.putString("lastName","");
+            i.putExtras(extras2);
+            startActivity(i);
+        });
     }
 
 

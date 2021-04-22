@@ -9,9 +9,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -25,7 +22,7 @@ public class StudentPage extends AppCompatActivity {
 
 
     TextView SID,SName;
-    Button update;
+    Button update, register,out;
     RecyclerView rl;
     private String firstName,id, lastName, password, emailAddress, name;
     private static String course[];
@@ -39,6 +36,11 @@ public class StudentPage extends AppCompatActivity {
         setContentView(R.layout.activity_student_page);
         SID = findViewById(R.id.StdID);
         SName = findViewById(R.id.StdName);
+        out = findViewById(R.id.logout);
+        out.setOnClickListener(v -> {
+            Intent i = new Intent(StudentPage.this, MainActivity.class);
+            startActivity(i);
+        });
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {
@@ -96,6 +98,15 @@ public class StudentPage extends AppCompatActivity {
         SID.setText(id);
         SName.setText(name);
         update = findViewById(R.id.update);
+        register = findViewById(R.id.register);
+        register.setOnClickListener(v -> {
+            Intent i = new Intent(StudentPage.this, RegisterClass.class);
+            Bundle extras2 = new Bundle();
+            extras2.putString("ID", id);
+            extras2.putString("NAME", name);
+            i.putExtras(extras2);
+            startActivity(i);
+        });
         update.setOnClickListener(v -> {
             update();
         });

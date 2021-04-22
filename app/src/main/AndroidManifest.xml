@@ -11,6 +11,7 @@
         android:theme="@style/Theme.APL_PROJECT">
         <activity android:name=".Class"></activity>
         <activity android:name=".StudentPage" />
+        <activity android:name=".RegisterClass"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
