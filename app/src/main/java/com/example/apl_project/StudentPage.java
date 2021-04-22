@@ -27,12 +27,10 @@ public class StudentPage extends AppCompatActivity {
     TextView SID,SName;
     Button update;
     RecyclerView rl;
-    int counter = 0;
     private String firstName,id, lastName, password, emailAddress, name;
     private static String course[];
     private static String times[];
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    int noOfClasses;
 
 
     @Override

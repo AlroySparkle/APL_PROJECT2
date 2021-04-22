@@ -11,16 +11,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
-        android:layout_marginLeft="161dp"
         android:layout_marginTop="69dp"
         android:layout_marginEnd="161dp"
-        android:layout_marginRight="161dp"
         android:layout_marginBottom="112dp"
         android:text="Student Name"
         android:textColor="#100E0E"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

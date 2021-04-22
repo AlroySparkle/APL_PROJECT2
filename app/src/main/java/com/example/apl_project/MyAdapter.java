@@ -41,7 +41,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.title.setText("CS"+this.s1[position]);
         holder.time.setText(position+"-"+(position+1));
         holder.attend.setOnClickListener(v -> {
-            Intent intent=new Intent(v.getContext(),OUT.class);
+            Intent intent=new Intent(v.getContext(), Class.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             Bundle bundle=new Bundle();
             bundle.putString("ID", this.Id);
